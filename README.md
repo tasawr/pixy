@@ -16,13 +16,13 @@ INSTALLATION
 
 Clone the Github repository. Update the vendor libraries:
 
-    $> git clone git://github.com/pminnieur/entropy.js.git
+    $> git clone git://github.com/pminnieur/index.js.git
     $> sh update_vendors.sh
 
 
 You can run an entropy instance just by starting it with the `node` command:
 
-    node entropy.js
+    node index.js
 
 
 CONFIGURATION
@@ -39,7 +39,7 @@ You can use entropy without any models, but I recommend to have a schema for
 each of your models. You can put your Mongoose models in the `/models`
 directory. Here's an example of an simple user model:
 
-    // models/user.js
+    // models/post.js
     var mongoose = require("mongoose").Mongoose;
 
     mongoose.model("user", {
@@ -111,7 +111,7 @@ If you want to overload the default behavior of the REST controllers, simply
 put your own in the `/controllers` directory. Here's an example for a customized
 user controller which removes users' email address from the response:
 
-    // controllers/user.js
+    // controllers/post.js
     var app = modules.parent.exports.app,
         db = modules.parent.exports.db;
         

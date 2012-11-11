@@ -1,0 +1,34 @@
+{
+    "name":"pixy",
+    "description":"REST API Server for pixy",
+    "version":"0.9.0",
+    "author":"Nurul Ferdous <nurul@tasawr.com>",
+    "contributors":[
+        {
+            "name":"Nurul Ferdous",
+            "email":"nurul@tasawr.com"
+        }
+    ],
+    "dependencies":{
+        "express":"3.0.2",
+        "connect":"*",
+        "connect-mongo":"*",
+        "fbgraph":"git://github.com/criso/fbgraph.git#281a953ff184",
+        "mongoose":"*",
+        "underscore":"*",
+        "jade":"*"
+    },
+    "keywords":["mongodb", "mongo", "db", "web", "rest", "restful"],
+    "repository":"git@github.com:tasawr/pixy.git",
+    "bin":{
+        "pixy-rest":"./bin/mongodb-rest"
+    },
+    "engines":{
+        "node":">= 0.8.8"
+    },
+    "private":true,
+    "scripts":{
+        "start":"node app"
+    }
+}
+
