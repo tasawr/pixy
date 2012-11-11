@@ -1,0 +1,6 @@
+/config.json
+/controllers/*
+/models/*
+/public/*
+/views/*
+.idea
