@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87f8d464-695c-4281-8d91-c5053aba4b40" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-    </list>
+    <list default="true" id="87f8d464-695c-4281-8d91-c5053aba4b40" name="Default" comment="" />
     <ignored path="pixy.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/app.js" changelist="87f8d464-695c-4281-8d91-c5053aba4b40" time="1352728433189" ignored="false" />
@@ -37,7 +35,7 @@
       <file leaf-file-name="config.json" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="59" selection-start="647" selection-end="647" vertical-scroll-proportion="0.32392028">
+            <state line="22" column="44" selection-start="480" selection-end="489" vertical-scroll-proportion="0.2740864">
               <folding />
             </state>
           </provider>
@@ -46,7 +44,7 @@
       <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="39" selection-start="79" selection-end="79" vertical-scroll-proportion="0.0">
+            <state line="103" column="24" selection-start="2810" selection-end="2810" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -465,14 +463,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="39" selection-start="79" selection-end="79" vertical-scroll-proportion="0.0">
+        <state line="103" column="24" selection-start="2810" selection-end="2810" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="59" selection-start="647" selection-end="647" vertical-scroll-proportion="0.32392028">
+        <state line="22" column="44" selection-start="480" selection-end="489" vertical-scroll-proportion="0.2740864">
           <folding />
         </state>
       </provider>
