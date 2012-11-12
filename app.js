@@ -1,18 +1,20 @@
 //    MongoStore = require('connect-mongo'),
 
 var express = require('express'),
-    graph = require('fbgraph')             ,
+    graph = require('fbgraph'),
     crypto = require('crypto'),
     express = require('express'),
-    connect = require('connect')       ,
-    http = require('http')     ,
-    path = require('path')    ,
+    connect = require('connect'),
+    http = require('http'),
+    path = require('path'),
     mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId,
     fs = require('fs'),
     sys = require('sys'),
     extname = require('path').extname;
 
-var app = express();
+var app = module.exports = express();
 
 app.configure(function () {
     app.set('port', process.env.PORT || 3000);
@@ -70,11 +72,11 @@ cfg.loader.models.forEach(loader);
 
 db = mongoose.connect(cfg.mongodb);
 
-var handleError = function (msg, err, req, res, next) {
-    if (req.session) {
-        req.session.destroy();
-    }
-    console.log(msg, err);
+var handleError = function (err, req, res, next) {
+//    if (req.session) {
+//        req.session.destroy();
+//    }
+    console.log(err);
     res.json({ success:false, error:err });
 };
 
@@ -82,8 +84,8 @@ var handleError = function (msg, err, req, res, next) {
 // load default controller
 if (cfg.loader.use_default_controller) {
     app.get('/:collection', function (req, res, next) {
-        var model_class = req.params.collection.charAt(0).toUpperCase() + req.params.collection.slice(1);
-        var qw = eval(model_class).where('profileId');
+        model_class = require("./models/" + req.params.collection.charAt(0).toUpperCase() + req.params.collection.slice(1));
+        var qw = model_class.where('profileId');
         if (req.param('query')) {
             qw.where(req.param('query'));
         }
@@ -112,8 +114,8 @@ if (cfg.loader.use_default_controller) {
 
     // READ
     app.get('/:collection/:id', function (req, res, next) {
-        var model_class = req.params.collection.charAt(0).toUpperCase() + req.params.collection.slice(1);
-        qw = eval(model_class).findById(req.params.id);
+        model_class = require("./models/" + req.params.collection.charAt(0).toUpperCase() + req.params.collection.slice(1));
+        qw = model_class.findById(req.params.id);
         qw.run(function (err, rows) {
             if (err) {
                 handleError('Could not retrieve list of runs', rows, req, res);
@@ -127,11 +129,12 @@ if (cfg.loader.use_default_controller) {
 
     // CREATE
     var createDoc = function (req, res, next) {
-        var model_class = req.params.collection.charAt(0).toUpperCase() + req.params.collection.slice(1);
-        var doc = new eval(model_class);
-        doc.merge(req.param(req.params.collection));
-        doc.save(function () {
-            res.json(doc, 201);
+        model_class = require("./models/" + req.params.collection.charAt(0).toUpperCase() + req.params.collection.slice(1));
+        placeModel = require("./models/Place");
+        var doc = new model_class(req.body);
+        doc.save(function (err) {
+            if (err) return handleError(err);
+            res.json(req.body, 201);
         });
     };
 
@@ -140,18 +143,11 @@ if (cfg.loader.use_default_controller) {
 
     // MODIFY
     var modifyDoc = function (req, res, next) {
-        var model_class = req.params.collection.charAt(0).toUpperCase() + req.params.collection.slice(1);
-        eval(model_class).findById(req.params.id, function (doc) {
-            if (!doc) {
-                next(new NotFound);
-            } else {
-                doc.merge(req.param(req.params.collection));
-
-                doc.save(function () {
-                    res.json(doc.toObject(), 200);
-                });
-            }
+        model_class = require("./models/" + req.params.collection.charAt(0).toUpperCase() + req.params.collection.slice(1));
+        model_class.update({_id:req.params.id}, req.body, function (err) {
+            if (err) return handleError(err);
         });
+        res.json(req.body, 200);
     };
 
     app.put('/:collection/:id', modifyDoc);
@@ -159,16 +155,11 @@ if (cfg.loader.use_default_controller) {
 
     // REMOVE
     app.del('/:collection/:id', function (req, res, next) {
-        var model_class = req.params.collection.charAt(0).toUpperCase() + req.params.collection.slice(1);
-        eval(model_class).findById(req.params.id, function (doc) {
-            if (!doc) {
-                next(new NotFound);
-            } else {
-                doc.remove(function () {
-                    res.json('200 OK', 200);
-                });
-            }
+        model_class = require("./models/" + req.params.collection.charAt(0).toUpperCase() + req.params.collection.slice(1));
+        model_class.remove({_id:req.params.id}, function (err) {
+            if (err) return handleError(err);
         });
+        res.json(req.body, 200);
     });
 }
 
