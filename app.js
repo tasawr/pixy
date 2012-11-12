@@ -11,7 +11,6 @@ var express = require('express'),
     Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId,
     fs = require('fs'),
-    sys = require('sys'),
     extname = require('path').extname;
 
 var app = module.exports = express();

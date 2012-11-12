@@ -1,0 +1,26 @@
+{
+    "debug":true,
+    "logger":true,
+
+    "loader":{
+        "use_default_controller":true,
+        "models":["./models"]
+    },
+
+    "mongo":{
+        "host":"localhost",
+        "port":27017,
+        "name":"pixy"
+    },
+
+    "server":{
+        "addr":"localhost",
+        "port":3000
+    },
+    "redirect_uri":"http://localhost:3000/auth/facebook",
+    "client_id":"132745930199228",
+    "client_secret":"85df4b43815ceb976c9050f4f77f599f",
+    "mongodb":"mongodb://mongoUser:mongoPass@localhost:27017/pixy",
+    "scope":"email, user_about_me, user_birthday, user_location, publish_stream",
+    "sessionSecret":"oasjdf0asdufdsf0asd9f0adfks"
+}
